@@ -1,7 +1,7 @@
-import BasicLayout from '../layouts/Basic'
-import MnemonicCodeTable from "../components/MnemonicCodeTable";
+import BasicLayout from '../../layouts/Basic'
+import MnemonicCodeTable from "../../components/MnemonicCodeTable";
 
-export default function MnemonicCode() {
+export default function Index() {
     return (
         <BasicLayout>
             <div className=''>

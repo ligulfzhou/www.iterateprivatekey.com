@@ -5,11 +5,14 @@ import {
     Tbody,
     Tr,
     Th,
-    TableContainer, Td, Skeleton, Tag,
+    TableContainer, Td, Skeleton,
+    Tag, TagLabel,
 } from '@chakra-ui/react'
 import Pagination from "./Pagination";
 import {emptyArrayOfLength} from "../utils/util";
 import useMnemonicCodes from "../hooks/useMnemonicCodes";
+import Link from "next/link";
+import {CheckIcon, CloseIcon, ArrowRightIcon} from '@chakra-ui/icons'
 
 
 export default function MnemonicCodeTable() {
@@ -55,18 +58,26 @@ export default function MnemonicCodeTable() {
                                                         ))}
                                                     </div>
                                                 </Td>
-                                                <Td>{item.valid ? "Valid": "Not Valid"}</Td>
-                                                <Td>xyz...</Td>
+                                                <Td>{item.valid ? (<CheckIcon/>) : (<CloseIcon/>)}</Td>
+                                                <Td>{item.valid && (
+                                                    <Link href={`/mnemoniccode/detail?mnemonic=${item.words}`}
+                                                          className='cursor-pointer'>
+                                                        <Tag
+                                                            variant='solid' colorScheme='teal'
+                                                            class='cursor-pointer'
+                                                        >
+                                                            <TagLabel>Detail</TagLabel>
+                                                            <ArrowRightIcon/>
+                                                        </Tag>
+                                                    </Link>
+                                                )}</Td>
                                             </Tr>
-                                            // <PrivateKeyTableRow key={item.number} keyPair={item}/>
                                         )
                                     })}
                                 </Tbody>
                             </Table>
                         </TableContainer>
-
                     </div>
-
                     <Pagination/>
                 </>
             </div>
