@@ -12,7 +12,7 @@ import Pagination from "./Pagination";
 import {emptyArrayOfLength} from "../utils/util";
 import useMnemonicCodes from "../hooks/useMnemonicCodes";
 import Link from "next/link";
-import {CheckIcon, CloseIcon, ArrowRightIcon} from '@chakra-ui/icons'
+import {CheckIcon, CloseIcon, ChevronRightIcon} from '@chakra-ui/icons'
 
 
 export default function MnemonicCodeTable() {
@@ -67,7 +67,7 @@ export default function MnemonicCodeTable() {
                                                             class='cursor-pointer'
                                                         >
                                                             <TagLabel>Detail</TagLabel>
-                                                            <ArrowRightIcon/>
+                                                            <ChevronRightIcon/>
                                                         </Tag>
                                                     </Link>
                                                 )}</Td>

@@ -6,7 +6,7 @@ import {
     Tag,
     Tooltip, Spinner
 } from '@chakra-ui/react'
-import {shorterString} from "../utils/util";
+import {shorterString, copyToClipboard} from "../utils/util";
 import useAddressBalance from "../hooks/useAddressBalance";
 
 const CustomCard = React.forwardRef(({children, ...rest}, ref) => (
@@ -16,8 +16,6 @@ const CustomCard = React.forwardRef(({children, ...rest}, ref) => (
         </Tag>
     </Box>
 ))
-
-
 
 
 export default function PrivateKeyTableRow({keyPair}) {
@@ -38,21 +36,31 @@ export default function PrivateKeyTableRow({keyPair}) {
         }
         return false
     }
+
+    const copy = async (s)=> {
+        const copied = await copyToClipboard(s)
+        if (copied) {
+            console.log("copied...")
+        } else {
+            console.log("copy failed...")
+        }
+    }
+
     return (
         <Tr>
             <Td>{item.number}</Td>
-            <Td>
+            <Td onClick={()=> copy(item.private_keys.compressed)}>
                 <Tooltip label={item.private_keys.compressed}>
                     <CustomCard>{shorterString(item.private_keys.compressed)}</CustomCard>
                 </Tooltip>
             </Td>
-            <Td>
+            <Td onClick={()=> copy(item.private_keys.uncompressed)}>
                 <Tooltip label={item.private_keys.uncompressed}>
                     <CustomCard>{shorterString(item.private_keys.uncompressed)}</CustomCard>
                 </Tooltip>
             </Td>
 
-            <Td>
+            <Td onClick={()=> copy(item.addresses.address)}>
                 <Tooltip label={item.addresses.address}>
                     <CustomCard>{shorterString(item.addresses.address)}</CustomCard>
                 </Tooltip>
@@ -73,7 +81,7 @@ export default function PrivateKeyTableRow({keyPair}) {
                     </>
                 )}
             </Td>
-            <Td>
+            <Td onClick={()=> copy(item.addresses.address_uncompressed)}>
                 <Tooltip label={item.addresses.address_uncompressed}>
                     <CustomCard>{shorterString(item.addresses.address_uncompressed)}</CustomCard>
                 </Tooltip>
@@ -94,7 +102,7 @@ export default function PrivateKeyTableRow({keyPair}) {
                     </>
                 )}
             </Td>
-            <Td>
+            <Td onClick={()=> copy(item.addresses.address_segwit)}>
                 <Tooltip label={item.addresses.address_segwit}>
                     <CustomCard>{shorterString(item.addresses.address_segwit)}</CustomCard>
                 </Tooltip>
@@ -115,7 +123,7 @@ export default function PrivateKeyTableRow({keyPair}) {
                     </>
                 )}
             </Td>
-            <Td>
+            <Td onClick={()=> copy(item.addresses.p2sh_segwit)}>
                 <Tooltip label={item.addresses.p2sh_segwit}>
                     <CustomCard>{shorterString(item.addresses.p2sh_segwit)}</CustomCard>
                 </Tooltip>
