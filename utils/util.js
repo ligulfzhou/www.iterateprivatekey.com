@@ -47,3 +47,13 @@ export function emptyArrayOfLength(len) {
     for (var i = 0; i < len; i++) x[i] = 0;
     return x
 }
+
+export const copyToClipboard = async (s)=> {
+    try {
+        await navigator.clipboard.writeText(s)
+        return true
+    } catch (e) {
+        console.log(`copy ${s} to clipboard failed with ${e}`)
+        return false
+    }
+}
