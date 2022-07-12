@@ -1,30 +1,28 @@
 import BasicLayout from '../../layouts/Basic'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import {derivationPaths} from "../../utils/const";
 
 export default function Index() {
-
-
-
     return (
         <BasicLayout>
             <div className='mx-auto mx-12'>
                 <Tabs>
                     <TabList>
-                        <Tab>One</Tab>
-                        <Tab>Two</Tab>
-                        <Tab>Three</Tab>
+                        {derivationPaths.map((path)=> {
+                            return (
+                                <Tab>{path}</Tab>
+                            )
+                        })}
                     </TabList>
 
                     <TabPanels>
-                        <TabPanel>
-                            <p>one!</p>
-                        </TabPanel>
-                        <TabPanel>
-                            <p>two!</p>
-                        </TabPanel>
-                        <TabPanel>
-                            <p>three!</p>
-                        </TabPanel>
+                        {derivationPaths.map((path)=> {
+                            return (
+                                <TabPanel>
+                                    <p>Stay Tuned</p>
+                                </TabPanel>
+                            )
+                        })}
                     </TabPanels>
                 </Tabs>
             </div>
