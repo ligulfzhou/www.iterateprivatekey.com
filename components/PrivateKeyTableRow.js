@@ -6,11 +6,12 @@ import {
     Tag,
     Tooltip, Spinner
 } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react'
 import {shorterString, copyToClipboard} from "../utils/util";
 import useAddressBalance from "../hooks/useAddressBalance";
 
 const CustomCard = React.forwardRef(({children, ...rest}, ref) => (
-    <Box p='1'>
+    <Box p='1' className='cursor-copy'>
         <Tag ref={ref} {...rest}>
             {children}
         </Tag>
@@ -19,6 +20,8 @@ const CustomCard = React.forwardRef(({children, ...rest}, ref) => (
 
 
 export default function PrivateKeyTableRow({keyPair}) {
+    const toast = useToast()
+
     const item = keyPair
     let addresses = [item.addresses.address, item.addresses.address_uncompressed, item.addresses.address_segwit, item.addresses.p2sh_segwit]
     const {balance, address_script_dict, isError, isLoading} = useAddressBalance(addresses)
@@ -40,6 +43,11 @@ export default function PrivateKeyTableRow({keyPair}) {
     const copy = async (s)=> {
         const copied = await copyToClipboard(s)
         if (copied) {
+            toast({
+                title: `${s} copied`,
+                position: 'bottom-right',
+                isClosable: true,
+            })
             console.log("copied...")
         } else {
             console.log("copy failed...")

@@ -3,18 +3,31 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import {derivationPaths} from "../../utils/const";
 
 export default function Index() {
+
+    const reload = ()=> {
+
+    }
+
     return (
         <BasicLayout>
             <div className='mx-auto mx-12'>
-                <Tabs>
+                <Tabs
+                    align='center'
+                    variant='enclosed'
+                    className='mt-4'
+                >
                     <TabList>
                         {derivationPaths.map((path)=> {
                             return (
-                                <Tab>{path}</Tab>
+                                <Tab
+                                    onClick={()=>{
+                                        console.log(path)
+                                    }}
+                                    key={path}
+                                >{path}</Tab>
                             )
                         })}
                     </TabList>
-
                     <TabPanels>
                         {derivationPaths.map((path)=> {
                             return (
