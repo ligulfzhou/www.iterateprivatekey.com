@@ -57,3 +57,10 @@ export const copyToClipboard = async (s)=> {
         return false
     }
 }
+
+export const defaultValue = (value, defaultValue="")=> {
+    if (isNullString(value)) {
+        return defaultValue
+    }
+    return value
+}

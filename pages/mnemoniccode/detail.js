@@ -1,11 +1,23 @@
 import BasicLayout from '../../layouts/Basic'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import {derivationPaths} from "../../utils/const";
+import useDerivationPath from "../../hooks/useDerivationPath";
+import {useRouter} from "next/router";
 
 export default function Index() {
 
-    const reload = ()=> {
+    const {keyPairs, isError, isLoading} = useDerivationPath()
+    const router = useRouter()
+    const {query} = useRouter()
 
+    const reload = (path)=> {
+        let params = JSON.parse(JSON.stringify(query))
+        params['path'] = path
+        router.push({
+            pathname: router.asPath.split("?")[0], query: params
+        }, undefined, {
+            shallow: true
+        })
     }
 
     return (
@@ -21,7 +33,7 @@ export default function Index() {
                             return (
                                 <Tab
                                     onClick={()=>{
-                                        console.log(path)
+                                        reload(path)
                                     }}
                                     key={path}
                                 >{path}</Tab>
