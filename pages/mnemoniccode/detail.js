@@ -3,6 +3,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import {derivationPaths} from "../../utils/const";
 import useDerivationPath from "../../hooks/useDerivationPath";
 import {useRouter} from "next/router";
+import DerivationPathKeyPairTable from "../../components/DerivationPathKeyPairTable";
 
 export default function Index() {
 
@@ -22,7 +23,7 @@ export default function Index() {
 
     return (
         <BasicLayout>
-            <div className='mx-auto mx-12'>
+            <div className='mx-auto '>
                 <Tabs
                     align='center'
                     variant='enclosed'
@@ -44,7 +45,7 @@ export default function Index() {
                         {derivationPaths.map((path)=> {
                             return (
                                 <TabPanel>
-                                    <p>Stay Tuned</p>
+                                    <DerivationPathKeyPairTable keyPairs={keyPairs} isError={isError} isLoading={isLoading} />
                                 </TabPanel>
                             )
                         })}
